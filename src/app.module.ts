@@ -1,8 +1,12 @@
-import { ControllersModule } from './controllers/controllers.module';
+import { ProfileModule } from './models/profile/profile.module';
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [ControllersModule],
+  imports: [
+    ProfileModule,
+    MongooseModule.forRoot('mongodb://localhost:27017'),
+  ],
   controllers: [],
   providers: [],
 })
