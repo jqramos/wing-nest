@@ -1,6 +1,8 @@
 
 
-import { Body, Post, Controller, Get } from '@nestjs/common';
+import { Body, Post, Controller, Get, UseInterceptors } from '@nestjs/common';
+import { UploadedFile } from '@nestjs/common/decorators';
+import { FileInterceptor } from '@nestjs/platform-express/multer';
 import { CreateProfileDto } from './dto/createProfile.dto';
 
 import { ProfileService } from './profile.service';
@@ -9,10 +11,14 @@ import { ProfileService } from './profile.service';
 export class ProfileController {
     constructor(private profileService: ProfileService) {}
 
+    //nest js upload a file
+    // web service to upload a file
     @Post('/create')
-    async create(@Body() createProfileDto: CreateProfileDto) {
-        return this.profileService.createProfile(createProfileDto);
+    @UseInterceptors(FileInterceptor('file'))
+    create(@Body() createProfileDto: CreateProfileDto, @UploadedFile() file: Express.Multer.File) {
+        return this.profileService.createProfile(createProfileDto, file);
     }
+
 
     @Get()
     getProfile() {

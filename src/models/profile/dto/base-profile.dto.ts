@@ -8,8 +8,6 @@ export class BaseProfileDto {
     id: MongooseSchema.Types.ObjectId;
     @IsOptional()
     description: string; 
-    @IsOptional() 
-    path: string; 
     @IsOptional()
     createdAt: Date;
 }

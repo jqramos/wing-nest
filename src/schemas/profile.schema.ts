@@ -15,7 +15,7 @@ export class Profile {
   description?: string;
 
   @Prop()
-  path?: string;
+  file?: string; 
 
   @Prop()
   createdAt?: Date;
