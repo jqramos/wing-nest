@@ -10,8 +10,8 @@ export class ProfileService {
         @InjectModel(Profile.name) private readonly model: Model<ProfileDocument>,
       ) {}
 
-    async createProfile(createProfileDto: CreateProfileDto) {
-        return await new this.model({
+    createProfile(createProfileDto: CreateProfileDto) {
+        return new this.model({
             ...createProfileDto,
             createdAt: new Date(),
           }).save();
