@@ -9,5 +9,9 @@ export class BaseProfileDto {
     @IsOptional()
     description: string; 
     @IsOptional()
+    fileType: string;
+    @IsOptional()
+    extension: string;  
+    @IsOptional()
     createdAt: Date;
 }

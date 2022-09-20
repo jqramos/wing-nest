@@ -15,7 +15,16 @@ export class Profile {
   description?: string;
 
   @Prop()
-  file?: string; 
+  path?: string; 
+
+  @Prop()
+  signedUrl?: string; 
+
+  @Prop()
+  fileType?: string; 
+
+  @Prop()
+  extension?: string; 
 
   @Prop()
   createdAt?: Date;

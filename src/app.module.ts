@@ -1,15 +1,25 @@
 import { ProfileModule } from './models/profile/profile.module';
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.dev.env',
+    }),
     ProfileModule, 
-    MongooseModule.forRoot(`mongodb+srv://craim:RFJ6jGEBCcWsd07r@cluster0.zi5zvli.mongodb.net/test`)
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('DB_HOST'),
+      }),
+      inject: [ConfigService],
+    })
   ],
   controllers: [],
   providers: [],
 })
 export class AppModule {}
+
